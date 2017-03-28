@@ -37,3 +37,6 @@ cd /opt/workspace/build/html
 nginx for html/index.html
 
 enjoy it!
+
+http://www.ibm.com/developerworks/cn/opensource/os-sphinx-documentation/
+
