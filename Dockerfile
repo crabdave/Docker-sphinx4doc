@@ -1,27 +1,34 @@
 
-# Pull base image  
-FROM centos:latest
 
-MAINTAINER crabdave "calorie.david@gmail.com"  
+# Pull base image
+FROM python:2
+
+MAINTAINER crabdave "calorie.david@gmail.com"
 
 # Usage: USER [UID]
 USER root
 
-# Usage: WORKDIR /path
-WORKDIR /root/
+# modify timezone
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-# Install python
-RUN yum install -y python
+#modify Character set
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+# Usage: WORKDIR /path
+WORKDIR /opt/
 
 # add ez_setup
-ADD  ez_setup-0.9.tar.gz /root
+ADD ez_setup-0.9.tar.gz /opt
 
-# install 
-RUN cd /root/ez_setup-0.9/ && python ez_setup.py
+# install
+RUN cd /opt/ez_setup-0.9/ && python ez_setup.py
 RUN easy_install sphinx
 
 # add demo
-ADD  demo.rst /root/
+ADD  demo.rst /opt/
 
-# start
-# RUN sphinx-quickstart
+# start interactive in container
+# sphinx-quickstart
